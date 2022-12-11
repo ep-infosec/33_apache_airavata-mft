@@ -1,0 +1,141 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+package org.apache.airavata.mft.api.service;
+
+import "CredCommon.proto";
+
+message CallbackEndpoint {
+    enum CallbackType {
+        HTTP = 0;
+        KAFKA = 1;
+    }
+    CallbackType type = 1;
+    string endpoint = 2;
+}
+
+message TransferApiRequest {
+    string sourcePath = 1;
+    string sourceStorageId = 2;
+    string sourceToken = 3;
+    string destinationPath = 4;
+    string destinationStorageId = 5;
+    string destinationToken = 6;
+    bool affinityTransfer = 7;
+    map<string, int32> targetAgents = 8;
+    org.apache.airavata.mft.common.AuthToken mftAuthorizationToken = 9;
+    repeated CallbackEndpoint callbackEndpoints = 10;
+}
+
+message TransferApiResponse {
+    string transferId = 1;
+}
+
+message BatchTransferApiRequest {
+    repeated TransferApiRequest transferRequests = 1;
+}
+
+message BatchTransferApiResponse {
+    repeated string transferIds = 1;
+}
+
+message HttpUploadApiRequest {
+    string destinationStorageId = 1;
+    string resourcePath = 2;
+    string destinationToken = 3;
+    string targetAgent = 5;
+    org.apache.airavata.mft.common.AuthToken mftAuthorizationToken = 6;
+}
+
+message HttpUploadApiResponse {
+    string url = 1;
+    string targetAgent = 2;
+}
+
+message HttpDownloadApiRequest {
+    string resourcePath = 1;
+    string sourceStorageId = 2;
+    string sourceToken = 3;
+    string targetAgent = 5;
+    org.apache.airavata.mft.common.AuthToken mftAuthorizationToken = 6;
+}
+
+message HttpDownloadApiResponse {
+    string url = 1;
+    string targetAgent = 2;
+}
+
+message TransferStateApiRequest {
+    string transferId = 1;
+    org.apache.airavata.mft.common.AuthToken mftAuthorizationToken = 2;
+}
+
+message TransferStateApiResponse {
+    string state = 1;
+    int64 updateTimeMils = 2;
+    double percentage = 3;
+    string description = 4;
+}
+
+message ResourceAvailabilityRequest {
+    string storageId = 1;
+    string resourcePath = 2;
+    string resourceToken = 4;
+    org.apache.airavata.mft.common.AuthToken mftAuthorizationToken = 7;
+}
+
+message ResourceAvailabilityResponse {
+    bool available = 1;
+}
+
+message FileMetadataResponse {
+    string friendlyName = 1;
+    int64 resourceSize = 2;
+    int64 createdTime = 3;
+    int64 updateTime = 4;
+    string md5sum = 5;
+    string resourcePath = 6;
+    string parentResourceId = 7;
+    string parentResourceType = 8;
+}
+
+message DirectoryMetadataResponse {
+    string friendlyName = 1;
+    int64 createdTime = 2;
+    int64 updateTime = 3;
+    string resourcePath = 4;
+    string parentResourceId = 5;
+    string parentResourceType = 6;
+    repeated DirectoryMetadataResponse directories = 7;
+    repeated FileMetadataResponse files = 8;
+    bool lazyInitialized = 9;
+}
+
+message FetchResourceMetadataRequest {
+    string resourcePath = 1;
+    string resourceToken = 4;
+    string storageId = 5;
+    string targetAgentId = 7;
+    org.apache.airavata.mft.common.AuthToken mftAuthorizationToken = 9;
+}
+
+service  MFTTransferService {
+
+    rpc submitTransfer(TransferApiRequest) returns (TransferApiResponse);
+
+    rpc submitBatchTransfer(BatchTransferApiRequest) returns (BatchTransferApiResponse);
+
+    rpc submitHttpUpload(HttpUploadApiRequest) returns (HttpUploadApiResponse);
+
+    rpc submitHttpDownload(HttpDownloadApiRequest) returns (HttpDownloadApiResponse);
+
+    rpc getTransferStates(TransferStateApiRequest) returns (stream TransferStateApiResponse);
+
+    rpc getTransferState(TransferStateApiRequest) returns (TransferStateApiResponse);
+
+    rpc getResourceAvailability(ResourceAvailabilityRequest) returns (ResourceAvailabilityResponse);
+
+    rpc getFileResourceMetadata(FetchResourceMetadataRequest) returns (FileMetadataResponse);
+
+    rpc getDirectoryResourceMetadata(FetchResourceMetadataRequest) returns (DirectoryMetadataResponse);
+}

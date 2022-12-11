@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <groupId>org.apache</groupId>
+        <artifactId>apache</artifactId>
+        <version>21</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.apache.airavata</groupId>
+    <artifactId>airavata-mft</artifactId>
+    <packaging>pom</packaging>
+    <name>Airavata MFT</name>
+    <version>0.01-SNAPSHOT</version>
+
+    <prerequisites>
+        <maven>3.0</maven>
+    </prerequisites>
+
+    <modules>
+        <module>common</module>
+        <module>core</module>
+        <module>services</module>
+        <module>api</module>
+        <module>transport</module>
+        <module>agent</module>
+        <module>controller</module>
+        <module>command-line</module>
+    </modules>
+
+    <url>http://airavata.apache.org/</url>
+    <inceptionYear>2011</inceptionYear>
+
+    <scm>
+        <connection>scm:git:https://github.com/apache/airavata-mft.git</connection>
+        <developerConnection>scm:git:https://github.com/apache/airavata-mft.git</developerConnection>
+        <url>https://github.com/apache/airavata-mft</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <mailingLists>
+
+        <mailingList>
+            <name>Airavata Developer List</name>
+            <subscribe>dev-subscribe@airavata.apache.org</subscribe>
+            <unsubscribe>dev-unsubscribe@airavata.apache.org</unsubscribe>
+            <post>mailto:dev@airavata.apache.org</post>
+            <archive>http://mail-archives.apache.org/mod_mbox/airavata-dev/</archive>
+        </mailingList>
+
+        <mailingList>
+            <name>Airavata Users List</name>
+            <subscribe>users-subscribe@airavata.apache.org</subscribe>
+            <unsubscribe>users-unsubscribe@airavata.apache.org</unsubscribe>
+            <post>mailto:users@airavata.apache.org</post>
+            <archive>http://mail-archives.apache.org/mod_mbox/airavata-users/</archive>
+        </mailingList>
+
+    </mailingLists>
+
+    <issueManagement>
+        <url>https://issues.apache.org/jira/browse/AIRAVATA</url>
+    </issueManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+            <version>${javax.annotation}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${org.slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-1.2-api</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+    </dependencies>
+
+    <properties>
+        <protobuf.maven.plugin>0.5.1</protobuf.maven.plugin>
+        <os.maven.plugin>1.5.0.Final</os.maven.plugin>
+        <javax.annotation>1.3.2</javax.annotation>
+        <consul.client>1.3.8</consul.client>
+        <h2>1.4.191</h2>
+        <protobuf.java>3.10.0</protobuf.java>
+        <grpc.spring.boot>3.5.1</grpc.spring.boot>
+        <spring.boot.data.jpa>2.2.1.RELEASE</spring.boot.data.jpa>
+        <org.slf4j.version>1.7.25</org.slf4j.version>
+        <log4j2.version>2.16.0</log4j2.version>
+        <dozer>5.5.1</dozer>
+        <jsch>0.1.55</jsch>
+        <sshj>0.27.0</sshj>
+        <mariadb.jdbc>2.5.1</mariadb.jdbc>
+        <jclouds.version>2.5.0</jclouds.version>
+        <commons.io.version>2.6</commons.io.version>
+        <apache.http.client.version>4.5.13</apache.http.client.version>
+    </properties>
+
+</project>
